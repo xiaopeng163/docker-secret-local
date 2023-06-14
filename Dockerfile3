@@ -1,0 +1,19 @@
+FROM gcc:9.4 AS builder
+
+ARG TOKEN
+
+RUN git clone https://$TOKEN@github.com/xiaopeng163/helloworld-c src
+
+WORKDIR /src
+
+RUN gcc --static -o hello hello.c
+
+
+
+FROM alpine:3.13.5
+
+COPY --from=builder /src/hello /src/hello
+
+ENTRYPOINT [ "/src/hello" ]
+
+CMD []

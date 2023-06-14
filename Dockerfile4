@@ -1,0 +1,11 @@
+FROM gcc:9.4
+
+RUN --mount=type=secret,id=my_secret git clone https://$(cat /run/secrets/my_secret)@github.com/xiaopeng163/helloworld-c src
+
+WORKDIR /src
+
+RUN gcc --static -o hello hello.c
+
+ENTRYPOINT [ "/src/hello" ]
+
+CMD []

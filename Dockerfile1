@@ -1,0 +1,11 @@
+FROM gcc:9.4
+
+RUN git clone https://ghp_xxxxxxxxxxxxxxxxxxxxxxxxx@github.com/xiaopeng163/helloworld-c src
+
+WORKDIR /src
+
+RUN gcc --static -o hello hello.c
+
+ENTRYPOINT [ "/src/hello" ]
+
+CMD []
